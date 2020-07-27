@@ -1,0 +1,71 @@
+---
+title: "rcocolors User Guide"
+author: "Brian Froeb"
+date: "7/27/2020"
+output: html_document
+editor_options: 
+  chunk_output_type: inline
+---
+```{r echo=FALSE}
+library(ggplot2)
+library(tmap)
+library(rcocolors)
+data(NLD_muni)
+```
+
+There are currently 16 colors included in this package the color names and their hex codes are below
+```{r, echo=FALSE}
+rco_color_list
+```
+
+These are grouped into 6 color palettes, 3 diverging color palettes and 3 single color ramps. The colors included in each palette and their hex codes are below
+```{r, echo=FALSE}
+rco_color_palettes
+```
+
+These color palettes can be inserted into ggplot graphics, examples of each palettes in ggplot are below
+
+## Functions Included
+
+This package includes four functions:
+
+-rco_cols()
+-rco_color_pal()
+-scale_color_rco()
+-scale_fill_rco()
+
+#### rco_cols
+takes a input string or group of strings and returns the hex code. 
+The color must be one of the colors included in this package
+
+##### Example:
+```{r}
+rco_cols("blue1")
+
+rco_cols("teal1", "brown3")
+```
+
+#### rco_color_pal
+
+Converts an input string representing a color palette into a function that can be converted into a usable color palette.
+
+```{r}
+rco_color_pal("blue to orange")
+```
+
+By adding a step count after the function it will return a usable palette
+
+```{r}
+rco_color_pal("blue to orange")(10)
+```
+
+These palettes can be reversed as needed
+
+```{r}
+rco_color_pal("blue to orange", reverse = TRUE)(10)
+```
+
+#### scale_color_rco and scale_fill_rco
+
+These functions supply a fill or color to a ggplot call. 
+

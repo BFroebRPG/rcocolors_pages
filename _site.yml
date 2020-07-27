@@ -1,0 +1,12 @@
+name: "rcocolors"
+output_dir: "."
+navbar:
+  title:
+  left:
+    - text: "User Guide"
+      href: index.html
+    - text: "Style Guide"
+      href: examples.html
+output:
+  html_document:
+    theme: flatly

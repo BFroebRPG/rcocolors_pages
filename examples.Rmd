@@ -1,0 +1,113 @@
+---
+title: "RCO R Style Guide"
+author: "Brian Froeb"
+date: "7/27/2020"
+output: html_document
+---
+```{r echo=FALSE}
+library(ggplot2)
+library(tmap)
+library(rcocolors)
+data(NLD_muni)
+```
+# Templetes {.tabset}
+
+## Difference Between Groups
+
+Of the 3 divergent color schemes the "blue to orange" color scheme highlights the differences between groups better than the  "red to brown" ad the "teal to brown" color schemes.
+```{r}
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Species)) +
+  geom_point(size = 4) +
+  scale_color_rco(palette = "blue to orange")
+```
+
+```{r}
+ggplot(iris, aes(Sepal.Length, fill = Species)) +
+  geom_dotplot() +
+  scale_fill_rco(palette = "blue to orange")
+```
+```{r}
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Species)) +
+  geom_point(size = 4) +
+  scale_color_rco(palette = "red to brown")
+```
+
+```{r}
+ggplot(iris, aes(Sepal.Length, fill = Species)) +
+  geom_dotplot() +
+  scale_fill_rco(palette = "red to brown")
+```
+
+```{r}
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Species)) +
+  geom_point(size = 4) +
+  scale_color_rco(palette = "teal to brown")
+```
+
+```{r}
+ggplot(iris, aes(Sepal.Length, fill = Species)) +
+  geom_dotplot() +
+  scale_fill_rco(palette = "teal to brown")
+```
+
+## Divergent Values
+
+Of the 3 divergent color schemes the "teal to brown" color scheme highlights the diverging values better than the  "red to brown" ad the "teal to brown" color schemes.
+
+```{r}
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Sepal.Length)) +
+  geom_point(size = 4) +
+  scale_color_rco(discrete = FALSE, palette = "blue to orange")
+```
+
+```{r}
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Sepal.Length)) +
+  geom_point(size = 4) +
+  scale_color_rco(discrete = FALSE, palette = "red to brown")
+```
+```{r}
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Sepal.Length)) +
+  geom_point(size = 4) +
+  scale_color_rco(discrete = FALSE, palette = "teal to brown")
+```
+
+However the reversed version of the "Red to Brown" provides a decent color scheme for highlighting increasing values of a single variable. This should be used when all values in the data are greater than 0
+
+```{r}
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Sepal.Length)) +
+  geom_point(size = 4) +
+  scale_color_rco(discrete = FALSE, palette = "red to brown", reverse = TRUE)
+```
+
+
+## Single Color Ramps
+
+The three single color ramps are more appropriate for increasing values where the lowest values are zero or close to zero. They should generally only be used with geographic data.
+
+```{r}
+ggplot(NLD_muni) +
+  geom_sf(aes(fill = population)) +
+  scale_fill_rco(palette = "blue_ramp", discrete = FALSE, reverse = TRUE)
+```
+
+```{r}
+ggplot(NLD_muni) +
+  geom_sf(aes(fill = population)) +
+  scale_fill_rco(palette = "red_ramp", discrete = FALSE, reverse = TRUE)
+```
+
+```{r}
+ggplot(NLD_muni) +
+  geom_sf(aes(fill = population)) +
+  scale_fill_rco(palette = "teal_ramp", discrete = FALSE, reverse = TRUE)
+```
+
+If the lowest values are not close to zero the Reversed "Brown to Red" Palette should be used
+
+```{r}
+ggplot(NLD_muni) +
+  geom_sf(aes(fill = population)) +
+  scale_fill_rco(palette = "red to brown", discrete = FALSE, reverse = TRUE)
+```
+
+
